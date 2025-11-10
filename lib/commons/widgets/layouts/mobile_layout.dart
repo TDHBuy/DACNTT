@@ -11,39 +11,39 @@ class MobileLayout extends GetView<BookingTableController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      behavior: HitTestBehavior.opaque,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Obx(() {
-            return controller.isSearching.value
-                ? _buildFading(SearchFilters())
-                : Text(title);
-          }),
-          actions: [
-            Obx(() {
-              return IconButton(
-                onPressed: () {
-                  controller.isSearching.toggle();
-                },
-                icon: Icon(
-                  controller.isSearching.value ? Icons.close : Icons.search,
-                ),
-              );
-            }),
-            IconButton(
-              onPressed: () async {
-                await controller.showFilterSheet(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Obx(() {
+          return controller.isSearching.value
+              ? _buildFading(SearchFilters())
+              : Text(title);
+        }),
+        actions: [
+          Obx(() {
+            return IconButton(
+              onPressed: () {
+                controller.isSearching.toggle();
               },
-              icon: Icon(Icons.filter_list),
-            ),
-          ],
-        ),
-        // Body Content
-        body: body,
+              icon: Icon(
+                controller.isSearching.value ? Icons.close : Icons.search,
+              ),
+            );
+          }),
+          IconButton(
+            onPressed: () async {
+              await controller.showFilterSheet(context);
+            },
+            icon: Icon(Icons.filter_list),
+          ),
+        ],
+      ),
+      // Body Content
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        behavior: HitTestBehavior.translucent,
+        child: body,
       ),
     );
   }

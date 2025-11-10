@@ -99,14 +99,16 @@ class BookingTableController extends GetxController {
         searchFocusNode.unfocus();
         searchController.clear();
         _debounceTimer?.cancel();
+        applyFilter();
       }
     });
   }
 
   void _initFocusListener() {
     searchFocusNode.addListener(() {
-      if (!searchFocusNode.hasFocus) {
-        isSearching.value = false;
+      if (isSearching.value &&
+          !searchFocusNode.hasFocus &&
+          searchController.text.isEmpty) {
         searchController.clear();
         _debounceTimer?.cancel();
       }
