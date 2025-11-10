@@ -31,6 +31,7 @@ class BookingTable extends GetView<BookingTableController> {
                 itemBuilder: (context, index) {
                   final booking = controller.bookings[index];
                   return BookingTableRow(
+                    controller: controller,
                     booking: booking,
                     onTap: () => controller.selectBooking(booking),
                   );
@@ -57,46 +58,67 @@ class BookingTable extends GetView<BookingTableController> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          _buildHeaderCell('Code', 80),
+          Expanded(child: _buildHeaderCell('Code')),
           16.widthBox,
-          _buildHeaderCell('Customer', 160),
+          Expanded(child: _buildHeaderCell('Customer')),
           16.widthBox,
-          _buildHeaderCell('Contact', 140),
+          Expanded(child: _buildHeaderCell('Contact')),
           16.widthBox,
-          _buildHeaderCell('Date', 140),
+          Expanded(child: _buildSortHeaderCell('Date')),
           16.widthBox,
-          _buildHeaderCell('Size', 80),
+          Expanded(child: _buildHeaderCell('Size', center: true)),
           16.widthBox,
           // _buildHeaderCell('Table', 80),
           // 16.widthBox,
-          const Expanded(
-            child: Text(
-              'Note',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Color(0xF0FFFFFF),
-              ),
-            ),
-          ),
+          Expanded(child: _buildHeaderCell('Note', center: true)),
           16.widthBox,
-          _buildHeaderCell('Status', 140),
+          Expanded(child: _buildHeaderCell('Status', center: true)),
         ],
       ),
     );
   }
 
-  Widget _buildHeaderCell(String title, double width) {
-    return SizedBox(
-      width: width,
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Color(0xF0FFFFFF),
-        ),
-        textAlign: TextAlign.center,
+  Widget _buildHeaderCell(String title, {bool center = false}) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: Color(0xF0FFFFFF),
+      ),
+      textAlign: center ? TextAlign.center : TextAlign.start,
+    );
+  }
+
+  Widget _buildSortHeaderCell(String title) {
+    return InkWell(
+      onTap: () => controller.toggleDateSort(),
+      borderRadius: BorderRadius.circular(4),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Obx(() {
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xF0FFFFFF),
+                ),
+              ),
+              4.widthBox,
+              Icon(
+                controller.dateAscending.value
+                    ? Icons.arrow_drop_up
+                    : Icons.arrow_drop_down,
+                size: 16,
+                color: const Color(0xF0FFFFFF),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

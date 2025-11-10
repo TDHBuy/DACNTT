@@ -1,5 +1,6 @@
 import 'package:booking/views/bookings/widgets/desktop/booking_table.dart';
-import 'package:booking/views/bookings/widgets/desktop/filters/status_filter_bar.dart';
+import 'package:booking/views/bookings/widgets/desktop/dashboards/statistic_screen.dart';
+import 'package:booking/views/bookings/widgets/desktop/filters/horizontal_filter_bar.dart';
 import 'package:flutter/material.dart';
 
 class BookingDesktopViews extends StatelessWidget {
@@ -9,8 +10,10 @@ class BookingDesktopViews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const StatusFilterBar(),
-        const SizedBox(height: 16),
+        const StatisticScreen(),
+        8.heightBox,
+        const HorizontalFilterBar(),
+        8.heightBox,
         const Expanded(child: BookingTable()),
       ],
     );

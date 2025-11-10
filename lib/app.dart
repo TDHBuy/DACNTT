@@ -19,8 +19,10 @@ class App extends StatelessWidget {
       //   '/second-screen' : (context) => const SecondScreen()
       // },
       initialRoute: TRoutes.bookingScreen,
-      unknownRoute: GetPage(name: '/page-not-found',
-          page: ()=> const Scaffold(body: Center(child: Text('Page not found'),))),
+      unknownRoute: GetPage(
+        name: '/page-not-found',
+        page: () => const Scaffold(body: Center(child: Text('Page not found'))),
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class TAppRoutes {
   static final List<GetPage> pages = [
-    GetPage(name: TRoutes.homePage, page: () => const MyApp()),
+    // GetPage(name: TRoutes.homePage, page: () => const MyApp()),
     GetPage(
       name: TRoutes.bookingScreen,
       page: () => const BookingsScreen(),

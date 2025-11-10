@@ -1,5 +1,4 @@
 import 'package:booking/app.dart';
-import 'package:booking/screens/bookings_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
